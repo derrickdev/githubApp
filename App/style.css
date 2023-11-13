@@ -1,0 +1,156 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    background-color: cornflowerblue;
+    font-family: 'poppins';
+    width: 100%;
+}
+#container{
+    background-color: #ffffff;
+    border-radius: 12px;
+    width: auto;
+    padding: 21px 15px;
+    max-width: 31.5em;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+gap: 12px;}
+#container .searchBox {
+    display: grid;
+    grid-template-columns: 9fr 3fr;
+    gap: 17px;
+}
+#container input {
+    font-size: 17px;
+    border: none;
+    border-bottom: 1px solid rgb(64, 127, 243);
+    padding: 12px ;
+    outline: none;
+    color: rgba(58, 58, 177, 0.836);
+}
+#container button{
+    border: none;
+    background-color: rgb(47, 107, 218);
+    color: white;
+    border-radius: 30px;
+}
+#container button:hover{
+    background-color: rgb(17, 54, 122);
+}
+#result {
+    max-height: 400px;
+    overflow-y: auto;
+    display: flex;
+    flex-wrap: wrap;
+    
+    margin-top: 35px;
+    background-image: url(profile.png);
+    background-position:center;
+}
+#result .userCard{
+    border: 1px solid  rgb(47, 107, 218);
+    border-radius: 10px;
+    box-shadow: 0 1em 1.em rgba(0, 0, 0, 0.36);
+    width: 50%;
+    background-color:rgb(80, 131, 226);
+    margin: 2px auto;
+    transition: 0.3s ease;
+
+}
+#result .userCard:hover {
+    background-color: rgba(97, 91, 91, 0.212);
+}
+#result .userAvatar {
+    width: 100%;
+    margin-bottom: 1em;
+}
+#result .userName {
+    display: flex;
+    margin: 2px auto;
+}
+#result .userName h3 {
+    font-size: 18px;
+    color: azure;
+    padding-right: 12px;
+}
+#result .userName span {
+    font-size: 20px;
+    color: rgb(1, 5, 12);
+}
+
+
+.modal {
+    display:none; 
+    position: fixed; 
+    text-align: center;
+    z-index: 1; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.4); 
+    transition:all ease-in 0.6s ;
+-webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+   animation-duration: 0.4s;
+  -webkit-animation-name:animatetop;
+}
+  @-webkit-keyframes animatetop {
+    from {top:-300px; opacity:0} 
+    to {top:0; opacity:1}
+  }
+  
+  @keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+  }
+  .modal .info {
+    display: flex;
+  }
+  .modal #userInfo {
+    display: flex;
+    flex-direction: column;
+  }
+  .modal img {
+    width: 50%;
+    padding-bottom: 20px;
+  }
+  .modal h4{
+    padding-right: 15px;
+    color: cornflowerblue;
+  }
+  .modal .info span {
+    font-size: 18px;
+  }
+  
+  .modal-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: 15% auto; 
+    padding: 20px;
+    border: 1px solid #888;
+    width: 70%; 
+  }
+  
+  
+  .close {
+    color: #aaa;
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 35px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }

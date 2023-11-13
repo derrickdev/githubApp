@@ -1,0 +1,11 @@
+{
+  "name": "assessment2_aihouderrick",
+  "version": "1.0.0",
+  "description": "",
+  "main": "script.js",
+  "scripts": {
+    "test": "vitest"
+  },
+  "author": "",
+  "license": "ISC"
+}
