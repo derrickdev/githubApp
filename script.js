@@ -5,7 +5,7 @@ let modal = document.getElementById("myModal");
 let span = document.getElementsByClassName("close")[0];
 let userInfo = document.getElementById("userInfo");
 
-const token = "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";
+const token =  process.env.ACCESS_TOKEN;
 const fetchDefaultUsers = () => {
     
     
