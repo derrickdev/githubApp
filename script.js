@@ -5,7 +5,53 @@ let modal = document.getElementById("myModal");
 let span = document.getElementsByClassName("close")[0];
 let userInfo = document.getElementById("userInfo");
 
-const token = "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";
+const token = "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";
+const fetchDefaultUsers = () => {
+    
+    
+  fetch("https://api.github.com/users", {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+    .then(response => response.json())
+    .then(users => {
+      if (Array.isArray(users)) {
+        const defaultUsers = users.slice(0, 40);
+        defaultUsers.forEach(user => {
+          fetch(user.avatar_url)
+            .then(response => response.blob())
+            .then(blob => {
+              var urlCreator = window.URL || window.webkitURL;
+              var imageUrl = urlCreator.createObjectURL(blob);
+
+              const userCard = document.createElement("div");
+              userCard.classList.add("userCard");
+              userCard.innerHTML = `
+                <img class="userAvatar" src="${imageUrl}" alt="User Avatar" />
+                <div class="userName">
+                  <h3>Name:</h3>
+                  <span>${user.login}</span>
+                </div>
+              `;
+              userCard.addEventListener("click", () => {
+                showUserInfo(user, imageUrl);
+              });
+              result.appendChild(userCard);
+            })
+            .catch(error => {
+              console.error("Error:", error);
+            });
+        });
+      } else {
+        console.error("Error: Invalid response from GitHub API");
+      }
+    })
+    .catch(error => {
+      console.error("Error:", error);
+    });
+};
+fetchDefaultUsers();
 
 function showUserInfo(data, imageUrl) {
   const name = data.name || "Name not available";
@@ -35,11 +81,12 @@ function showUserInfo(data, imageUrl) {
     </div>`;
 }
 
+
 btn.addEventListener("click", () => {
   let inputValue = userImput.value;
 
   if (inputValue === "") {
-    fetchDefaultUsers();
+    // fetchDefaultUsers();
   } else {
     let url = `https://api.github.com/users/${inputValue}`;
     fetch(url, {
@@ -67,60 +114,24 @@ btn.addEventListener("click", () => {
               </div>`;
           })
           .catch(error => {
-            console.error("Error:", error);
+            if (inputValue.length ==0) {
+              result.innerHTML=`
+              <h3>The input field cannot be empty</h3>`
+              
+          }
+          else {
+              result.innerHTML=`
+              <h3> Please enter a valid  username</h3>   `
+              
+          }
+          
           });
       })
-      .catch(error => {
-        console.error("Error:", error);
-      });
+      
   }
 });
 
-const fetchDefaultUsers = () => {
-    
-    
-    fetch("https://api.github.com/users", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then(response => response.json())
-      .then(users => {
-        if (Array.isArray(users)) {
-          const defaultUsers = users.slice(0, 40);
-          defaultUsers.forEach(user => {
-            fetch(user.avatar_url)
-              .then(response => response.blob())
-              .then(blob => {
-                var urlCreator = window.URL || window.webkitURL;
-                var imageUrl = urlCreator.createObjectURL(blob);
-  
-                const userCard = document.createElement("div");
-                userCard.classList.add("userCard");
-                userCard.innerHTML = `
-                  <img class="userAvatar" src="${imageUrl}" alt="User Avatar" />
-                  <div class="userName">
-                    <h3>Name:</h3>
-                    <span>${user.login}</span>
-                  </div>
-                `;
-                userCard.addEventListener("click", () => {
-                  showUserInfo(user, imageUrl);
-                });
-                result.appendChild(userCard);
-              })
-              .catch(error => {
-                console.error("Error:", error);
-              });
-          });
-        } else {
-          console.error("Error: Invalid response from GitHub API");
-        }
-      })
-      .catch(error => {
-        console.error("Error:", error);
-      });
-  };
+
   
 span.addEventListener("click", () => {
   modal.style.display = "none";
